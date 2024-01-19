@@ -1,21 +1,22 @@
  Here are my observations and suggestions for improvements in the given code-
 
+
 1. Error should be handled in the main method while starting the server.
-2. We can use gorilla/mux instead of using net/http package in order to have the previlege to set method(GET,PUT,POST,etc,.) for specific API.
-3. In createConnection() method, Database/SQL driver is used in the given code. Instead, we can use GORM.io/driver/mysql
-4. We can use ORM libraries such as GORM in order to perform the database transactions. This will improve the security and prevent from SQL injection attacks.
-5.  GORM provides Save() method which can be used for both creating and updating transactions in a single end point.In the given code, there are 2 endpoints- /createUser and /updateUser. We can use Save() method with single end point to acheive both actions.
-6. We can use log package instead of fmt package for printing results and errors.
-7. There are no error codes returned in any of the APIs in the given code. Response code is must for an API. 
-8. There is no folder structure in the given code which will be difficult to maintain. Entire code base has to be refracted to have a proper folder structure. 
+2. We can use gorilla/mux instead of using net/http package in order to have the privilege to set methods(GET,PUT,POST,etc,.) for specific API.
+3. In the createConnection() method, a Database/SQL driver is used in the given code. Instead, we can use GORM.io/driver/mysql
+4. We can use ORM libraries such as GORM in order to perform the database transactions. This will improve the security and prevent SQL injection attacks.
+5.  GORM provides a Save() method which can be used for both creating and updating transactions in a single end point.In the given code, there are 2 endpoints- /createUser and /updateUser. We can use the Save() method with a single endpoint to achieve both actions.
+6. We can use the log package instead of the fmt package for printing results and errors.
+7. There are no error codes returned in any of the APIs in the given code. Response code is a must for an API.
+8. There is no folder structure in the given code which will be difficult to maintain. Entire code base has to be refracted to have a proper folder structure.
 9. We can directly pull the images with golang from the docker hub instead of pulling ubuntu images and installing golang.
-10. We can also pull images with mysql from docker hub and create container for maintaining database.
+10. We can also pull images with mysql from docker hub and create containers for maintaining databases.
 11. Or else we can use docker-compose.yaml file for containerization.
 12. We should always RUN go mod download command to download module dependencies.
 13. We should always expose the container port to the outside world in order to interact with the application inside the container. This is applicable for both mysql database and Go http server.
-14. Every microservice structure should contain three different sections- Handler,Service and Database. 
-    (i) Handler is only responsible for validation, request and response. 
+14. Every microservice structure should contain three different sections- Handler,Service and Database.
+    (i) Handler is only responsible for validation, request and response.
     (ii)Service, on the other hand, is responsible for all the other Logical code.
     (iii)Database is responsible for only Database transactions.
 15. As a point of improvement apart from the above, we can use JWT(json tokens) for authenticating the endpoints in order to provide various user access permissions.
-16. For unit testing, we can use mockery tool for mocking database and testing the service logics. All the methods should be segregated into interfaces in order to mock the data.
+16. For unit testing, we can use a mockery tool for mocking databases and testing the service logics. All the methods should be segregated into interfaces in order to mock the data.
