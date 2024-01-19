@@ -1,10 +1,13 @@
 package main
 
 import (
-	"net/http"
+	"screening/config"
+	"screening/routes"
 )
 
 func main() {
-	setupJsonApi()
-	http.ListenAndServe(":80", nil)
+
+	config.InitializeDB("./config.env")
+	routes.SetupJsonApi()
+
 }

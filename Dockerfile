@@ -1,14 +1,20 @@
-# docker file for building Go application
-FROM ubuntu:latest
+# Start from the official Golang image
+FROM golang:latest
 
-# Install dependencies
-RUN sudo apt install -y git go wget
-
-COPY . /app
-
+# Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Build the application
+# Copy the local package files to the container's workspace
+COPY . .
+
+# Download all dependencies. They will be cached if the go.mod and go.sum files are not changed
+RUN go mod download
+
+# Build the Go app
 RUN go build -o main .
 
-CMD [ "main" ]
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["./main"]
